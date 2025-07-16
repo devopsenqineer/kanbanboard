@@ -607,33 +607,6 @@ const KanbanBoard = () => {
         e.dataTransfer.dropEffect = "move";
     };
 
-    const handleColumnDrop = (e, targetColumn) => {
-        if (!isAdmin) return; // Disable drop for viewers
-        e.preventDefault();
-        if (!draggedColumn || draggedColumn.id === targetColumn.id) return;
-
-        const sourceColumnId = draggedColumn.id;
-        const targetColumnId = targetColumn.id;
-
-        let updatedColumns = [...columns].filter(col => col.boardId === currentBoardId).sort((a, b) => a.order - b.order);
-        const sourceIndex = updatedColumns.findIndex(col => col.id === sourceColumnId);
-        const targetIndex = updatedColumns.findIndex(col => col.id === targetColumnId);
-
-        if (sourceIndex === -1 || targetIndex === -1) return;
-
-        const [removed] = updatedColumns.splice(sourceIndex, 1);
-        updatedColumns.splice(targetIndex, 0, removed);
-
-        // Update order for all columns
-        updatedColumns = updatedColumns.map((col, index) => ({ ...col, order: index }));
-
-        setColumns(prev => {
-            const otherBoardColumns = prev.filter(c => c.boardId !== currentBoardId);
-            return [...otherBoardColumns, ...updatedColumns];
-        });
-        setDraggedColumn(null);
-    };
-
 
     // Task Detail Modal Component
     const TaskDetailModal = ({ task, onClose, onUpdate, onDelete, isAdmin }) => {
