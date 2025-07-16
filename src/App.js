@@ -348,7 +348,7 @@ const KanbanBoard = () => {
     const [modalContent, setModalContent] = useState(null);
 
     const [draggedTask, setDraggedTask] = useState(null);
-    const [draggedColumn, setDraggedColumn] = useState(null);
+    const [, setDraggedColumn] = useState(null);
 
     const [showBoardManagementModal, setShowBoardManagementModal] = useState(false); // New state for board management modal
 
