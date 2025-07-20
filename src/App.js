@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { createPortal } from 'react-dom';
-import { supabase } from './supabaseClient'; // Pfad anpassen
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
