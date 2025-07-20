@@ -1,55 +1,30 @@
-name: Build and Deploy React App to GitHub Pages
+name: Deploy Static Site to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
-  contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: read
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install react-scripts
-        run: npm install react-scripts --save
-        
-      - name: NPM install
-        run: npm install
-
-      - name: Build React App
-        run: npm run build
-
-      - name: Create CNAME for Custom Domain
-        run: echo "kanban.salad1n.dev" > build/CNAME
+      - name: Deploy to GitHub Pages
+        uses: actions/configure-pages@v3
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: ./src  # <-- Pfad zu deinem statischen HTML Ordner, z.B. '.' oder 'frontend'
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
