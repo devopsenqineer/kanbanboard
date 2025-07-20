@@ -7,7 +7,7 @@ app.listen(PORT, () => {
   console.log(`Server läuft auf Port ${PORT}`);
 });
 
-const BACKEND_URL = 'https://kanban-backend.onrender.com';
+const BACKEND_URL = 'https://kanbanboard-krni.onrender.com;
 
 
 // Import Lucide React Icons
