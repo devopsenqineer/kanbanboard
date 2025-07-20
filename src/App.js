@@ -1,5 +1,14 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { createPortal } from 'react-dom';
+import { supabase } from './supabaseClient'; // Pfad anpassen
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server läuft auf Port ${PORT}`);
+});
+
+const BACKEND_URL = 'https://kanban-backend.onrender.com';
+
 
 // Import Lucide React Icons
 import { Plus, LogOut, Moon, Sun, X, Edit, Trash2, CheckCircle, CircleDot, Circle, Settings } from 'lucide-react';
@@ -174,18 +183,22 @@ const AuthScreen = ({ onLoginSuccess }) => {
     const [passwordChangeError, setPasswordChangeError] = useState('');
 
     // Default admin credentials (can be changed via the UI)
-    const ADMIN_USERNAME = 'admin';
-    const DEFAULT_ADMIN_PASSWORD = 'password123';
-    const getAdminPassword = () => getLocalStorageItem('kanban_admin_password', DEFAULT_ADMIN_PASSWORD);
-    const hasPasswordBeenChanged = () => getLocalStorageItem('kanban_password_changed', false);
+    //const ADMIN_USERNAME = 'admin';
+    //const DEFAULT_ADMIN_PASSWORD = 'password123';
+    //const getAdminPassword = () => getLocalStorageItem('kanban_admin_password', DEFAULT_ADMIN_PASSWORD);
+    //const hasPasswordBeenChanged = () => getLocalStorageItem('kanban_password_changed', false);
 
-    useEffect(() => {
+
+  //  useEffect(() => {
         // If already "logged in" (isAdmin true in localStorage) and password hasn't been changed
         // and current password is the default, force password change view.
-        if (getLocalStorageItem('kanban_isAdmin', false) && !hasPasswordBeenChanged() && getAdminPassword() === DEFAULT_ADMIN_PASSWORD) {
-            setShowPasswordChange(true);
-        }
-    }, []);
+       // if (getLocalStorageItem('kanban_isAdmin', false) && !hasPasswordBeenChanged() && getAdminPassword() === DEFAULT_ADMIN_PASSWORD) {
+       //     setShowPasswordChange(true);
+    //    }
+   // }, []);
+
+
+
 
     const handleLogin = (e) => {
         e.preventDefault();
